@@ -1,11 +1,14 @@
 /* eslint-disable */
 
 import type { AttributifyAttributes } from "@unocss/preset-attributify";
+import type * as Monaco from "monaco-editor";
 
-declare interface Window {
-  // extend the window
-  monaco: typeof m | undefined;
-  MonacoEnvironment: Environment;
+declare global {
+  interface Window {
+    // extend the window
+    monaco: typeof Monaco | undefined;
+    MonacoEnvironment: Monaco.Environment | undefined;
+  }
 }
 
 declare module "*.vue" {
