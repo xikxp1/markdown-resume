@@ -39,7 +39,8 @@ Highly recommend using Chromium-based browsers, e.g., [Chrome](https://www.googl
   - Data are saved locally within your browser, see [here](https://localforage.github.io/localForage/) for details
   - Open-source static website hosted on [Github Pages](https://pages.github.com/), which doesn't (have the ability to) collect your data
   - No user tracking, no ads
-- Auto-save - Your changes are automatically saved
+- Autosave
+- Version history and rollback
 - Dark mode
 
 ## Development
@@ -92,6 +93,33 @@ runtimeConfig: {
   }
 }
 ```
+
+### Version History
+
+By default, the system keeps up to 200 versions per resume and automatically deduplicates identical saves. You can customize these settings via environment variables:
+
+```
+NUXT_PUBLIC_VERSION_HISTORY_MAX=100
+NUXT_PUBLIC_VERSION_HISTORY_DEDUPE=false
+```
+
+Or modify the defaults in [`site/nuxt.config.ts`](site/nuxt.config.ts):
+
+```typescript
+runtimeConfig: {
+  public: {
+    versionHistoryMax: 200,        // Maximum versions to keep per resume
+    versionHistoryDedupe: true     // Enable deduplication
+  }
+}
+```
+
+**Features:**
+- Every save (manual or auto) creates a new version
+- Click the History button (clock icon) in the editor to view all versions
+- View side-by-side diffs comparing any version with the current content
+- Restore any previous version - this creates a new version, so rollback is reversible
+- Versions are stored locally alongside your resume data
 
 ## Credits
 

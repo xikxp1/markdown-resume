@@ -6,51 +6,61 @@
 </template>
 
 <script lang="tsx" setup>
+import File from './toolbar/File.vue';
+import Paper from './toolbar/Paper.vue';
+import ThemeColor from './toolbar/ThemeColor.vue';
+import FontFamily from './toolbar/FontFamily.vue';
+import FontSize from './toolbar/FontSize.vue';
+import Margins from './toolbar/Margins.vue';
+import ParagraphSpace from './toolbar/ParagraphSpace.vue';
+import LineHeight from './toolbar/LineHeight.vue';
+import CorrectCase from './toolbar/CorrectCase.vue';
+
 const sections = [
   {
     name: "file",
     icon: "i-carbon:import-export",
-    component: <File id="toolbar-file" />
+    component: <div id="toolbar-file"><File /></div>
   },
   {
     name: "paper",
     icon: "i-majesticons:paper-fold-line",
-    component: <Paper id="toolbar-paper" />
+    component: <div id="toolbar-paper"><Paper /></div>
   },
   {
     name: "theme-color",
     icon: "i-material-symbols:palette-outline",
-    component: <ThemeColor id="toolbar-theme-color" />
+    component: <div id="toolbar-theme-color"><ThemeColor /></div>
   },
   {
     name: "font-family",
     icon: "i-material-symbols:font-download-outline",
-    component: <FontFamily id="toolbar-font-family" />
+    component: <div id="toolbar-font-family"><FontFamily /></div>
   },
   {
     name: "font-size",
     icon: "i-ri:font-size-2",
-    component: <FontSize id="toolbar-font-size" />
+    component: <div id="toolbar-font-size"><FontSize /></div>
   },
   {
     name: "margins",
     icon: "i-radix-icons:margin",
-    component: <Margins id="toolbar-margins" />
+    component: <div id="toolbar-margins"><Margins /></div>
   },
   {
     name: "paragraph-space",
     icon: "i-icon-park-outline:paragraph-break-two",
-    component: <ParagraphSpace id="toolbar-paragraph-space" />
+    component: <div id="toolbar-paragraph-space"><ParagraphSpace /></div>
   },
   {
     name: "line-height",
     icon: "i-ic:round-format-line-spacing",
-    component: <LineHeight id="toolbar-line-height" />
+    component: <div id="toolbar-line-height"><LineHeight /></div>
   },
   {
     name: "correct-case",
     icon: "i-icon-park-outline:check-correct",
-    component: <CorrectCase id="toolbar-correct-case" />
+    component: <div id="toolbar-correct-case"><CorrectCase /></div>
   }
 ];
 

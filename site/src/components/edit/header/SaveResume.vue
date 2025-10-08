@@ -22,7 +22,7 @@ const save = () => {
     update: update
   } as ResumeStorageItem;
 
-  saveResume(id!, resume);
+  saveResume(id!, resume, "manual");
 };
 
 useShortcuts("ctrl+s", save);

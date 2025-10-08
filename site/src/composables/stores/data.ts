@@ -8,7 +8,8 @@ export const useDataStore = defineStore("data", () => {
     mdFlag: false,
     cssFlag: false,
     curResumeId: null,
-    curResumeName: DEFAULT_NAME
+    curResumeName: DEFAULT_NAME,
+    autosaveSuppressed: 0
   });
 
   const setData = <T extends keyof SystemData>(key: T, value: SystemData[T]) => {
@@ -24,11 +25,31 @@ export const useDataStore = defineStore("data", () => {
     data.cssFlag = to;
   };
 
+  const suppressAutosave = () => {
+    data.autosaveSuppressed++;
+  };
+
+  const releaseAutosave = () => {
+    if (data.autosaveSuppressed > 0) data.autosaveSuppressed--;
+  };
+
+  const withAutosaveSuppressed = async <T>(fn: () => T | Promise<T>): Promise<T> => {
+    suppressAutosave();
+    try {
+      return await fn();
+    } finally {
+      releaseAutosave();
+    }
+  };
+
   return {
     data,
     setData,
     toggleMdFlag,
-    toggleCssFlag
+    toggleCssFlag,
+    suppressAutosave,
+    releaseAutosave,
+    withAutosaveSuppressed
   };
 });
 

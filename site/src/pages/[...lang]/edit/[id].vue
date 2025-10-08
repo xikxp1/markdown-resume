@@ -7,6 +7,7 @@
 
       <template #tail>
         <SaveResume />
+        <HistoryButton @open-history="showHistory = true" />
         <ToggleToolbar
           :is-toolbar-open="isToolbarOpen"
           @toggle-toolbar="isToolbarOpen = !isToolbarOpen"
@@ -31,6 +32,14 @@
         <Toolbar />
       </div>
     </div>
+
+    <!-- Version History Dialog -->
+    <VersionHistoryDialog
+      v-if="data.curResumeId"
+      :resume-id="data.curResumeId"
+      :open="showHistory"
+      @close="showHistory = false"
+    />
   </div>
 </template>
 
@@ -39,6 +48,8 @@ import * as splitter from "@zag-js/splitter";
 import { normalizeProps, useMachine } from "@zag-js/vue";
 import { debounce } from "ts-debounce";
 import type { ResumeStorageItem } from "~/types";
+import HistoryButton from "~/components/edit/header/HistoryButton.vue";
+import VersionHistoryDialog from "~/components/edit/header/VersionHistoryDialog.vue";
 
 // Horizontal splitpane
 const [state, send] = useMachine(
@@ -70,7 +81,7 @@ const createResumePayload = (): ResumeStorageItem => ({
 const performAutosave = () => {
   const id = data.curResumeId;
   if (!id) return;
-  saveResume(id, createResumePayload());
+  saveResume(id, createResumePayload(), "auto");
 };
 
 const autosaveDebounceMs = Number(config.public.autosaveDebounceMs ?? 3000);
@@ -101,21 +112,27 @@ watch(
 watch(
   () => data.mdContent,
   () => {
-    if (ready.value && data.curResumeId) debouncedAutosave();
+    if (ready.value && data.curResumeId && data.autosaveSuppressed === 0) {
+      debouncedAutosave();
+    }
   }
 );
 
 watch(
   () => data.cssContent,
   () => {
-    if (ready.value && data.curResumeId) debouncedAutosave();
+    if (ready.value && data.curResumeId && data.autosaveSuppressed === 0) {
+      debouncedAutosave();
+    }
   }
 );
 
 watch(
   styles,
   () => {
-    if (ready.value && data.curResumeId) debouncedAutosave();
+    if (ready.value && data.curResumeId && data.autosaveSuppressed === 0) {
+      debouncedAutosave();
+    }
   },
   { deep: true }
 );
@@ -128,6 +145,9 @@ onBeforeUnmount(() => {
 // Toggle toolbar
 const { width } = useWindowSize();
 const isToolbarOpen = ref(width.value > 1024);
+
+// Version history
+const showHistory = ref(false);
 </script>
 
 <style scoped>

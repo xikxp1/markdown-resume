@@ -33,7 +33,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       googleFontsKey: "",
-      autosaveDebounceMs: 3000
+      autosaveDebounceMs: 3000,
+      versionHistoryMax: 200,
+      versionHistoryDedupe: true
     }
   },
 

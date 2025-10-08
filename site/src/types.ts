@@ -1,3 +1,5 @@
+export type SaveType = "manual" | "auto" | "rollback";
+
 export type PaperType = keyof typeof PAPER;
 
 export type ResumeStyles = {
@@ -19,6 +21,7 @@ export type SystemData = {
   cssFlag: boolean;
   curResumeId: string | null;
   curResumeName: string;
+  autosaveSuppressed: number;
 };
 
 export type ToastFlagData = {
@@ -55,8 +58,23 @@ export type ResumeStorageItem = {
   update: string;
 };
 
+export type ResumeVersionItem = {
+  versionId: string;
+  createdAt: string;
+  type: SaveType;
+  name: string;
+  markdown: string;
+  css: string;
+  styles: ResumeStyles;
+  hash: string;
+};
+
 export type ResumeStorage = {
   [id: string]: ResumeStorageItem;
+};
+
+export type ResumeHistoryStorage = {
+  [id: string]: ResumeVersionItem[];
 };
 
 export interface ResumeListItem extends ResumeStorageItem {

@@ -67,3 +67,21 @@ notification:
   import:
     yes: Datos importados correctamente!
     no : Formato de datos inválido.
+  restore: Restaurar desde copia de seguridad
+  error: Error al guardar los cambios
+
+history:
+  title: Historial de versiones
+  no_history: No hay historial disponible
+  type:
+    manual: Guardado Manual
+    auto: Guardado Automático
+    rollback: Restaurar
+  actions:
+    view: Ver
+    diff: Comparar
+    restore: Restaurar
+  confirm_restore: ¿Estás seguro de que quieres restaurar esta versión?
+  diff_title: Comparar versiones
+  current: Actual
+  selected: Seleccionado
