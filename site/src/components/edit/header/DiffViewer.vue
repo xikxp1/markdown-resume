@@ -1,14 +1,15 @@
 <template>
   <Teleport to="body">
-    <div v-if="true" class="fixed inset-0 z-50 flex items-center justify-center">
+    <div class="fixed inset-0 z-50 flex items-center justify-center">
       <!-- Backdrop -->
       <div class="absolute inset-0 bg-black/50" @click="$emit('close')" />
-      
+
       <!-- Dialog -->
-      <div class="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-6xl max-h-[90vh] w-full mx-4 flex flex-col">
+      <div
+        class="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-6xl max-h-[90vh] w-full mx-4 flex flex-col">
         <!-- Header -->
         <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-          <h2 class="text-xl font-semibold">Version Comparison</h2>
+          <h2 class="text-xl font-semibold">{{ $t('history.diff.title') }}</h2>
           <button @click="$emit('close')" class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
             <span i-ic:baseline-close class="text-xl" />
           </button>
@@ -16,27 +17,21 @@
 
         <!-- Tabs -->
         <div class="flex border-b border-gray-200 dark:border-gray-700 px-4">
-          <button
-            v-for="tab in tabList"
-            :key="tab.value"
-            @click="currentTab = tab.value"
+          <button v-for="tab in tabList" :key="tab.value" @click="currentTab = tab.value"
             class="relative px-4 py-2 text-sm"
-            :class="currentTab === tab.value ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'"
-          >
+            :class="currentTab === tab.value ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'">
             {{ tab.label }}
-            <span
-              v-if="currentTab === tab.value"
-              class="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500"
-            />
+            <span v-if="currentTab === tab.value" class="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500" />
           </button>
         </div>
 
         <!-- Diff Editor Container -->
         <div class="relative flex-1 overflow-hidden h-[70vh] min-h-[300px]">
           <!-- Side labels -->
-          <div class="absolute top-0 left-0 right-0 z-10 px-4 py-2 text-xs text-gray-600 dark:text-gray-300 flex justify-between bg-white/70 dark:bg-gray-800/70 backdrop-blur">
-            <span class="ml-14">Version</span>
-            <span class="mr-8">Current</span>
+          <div
+            class="absolute top-0 left-0 right-0 z-10 px-4 py-2 text-xs text-gray-600 dark:text-gray-300 flex justify-between bg-white/70 dark:bg-gray-800/70 backdrop-blur">
+            <span class="ml-14">{{ $t('history.diff.selected') }}</span>
+            <span class="mr-8">{{ $t('history.diff.current') }}</span>
           </div>
           <!-- Editor -->
           <div ref="diffEditorRef" class="absolute left-0 right-0 bottom-0 top-8"></div>
@@ -162,7 +157,7 @@ onBeforeUnmount(() => {
     diffEditor.setModel(null); // Clear the model first
     diffEditor.dispose();
   }
-  
+
   // Now safely dispose the models
   markdownOriginal?.dispose();
   markdownModified?.dispose();

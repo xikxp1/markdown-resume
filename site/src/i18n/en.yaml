@@ -74,14 +74,19 @@ history:
   title: Version History
   no_history: No version history available
   type:
-    manual: Manual Save
-    auto: Auto Save
+    manual: Manual save
+    auto: Autosave
     rollback: Rollback
+  no_changes: No changes
   actions:
-    view: View
-    diff: View Diff
+    diff: View diff
     restore: Restore
-  confirm_restore: Are you sure you want to restore this version? This will create a new version with the restored content.
-  diff_title: Version Comparison
-  current: Current Version
-  selected: Selected Version
+  restore:
+    title: Restore Version
+    dialog: Are you sure you want to restore this version? This will create a new version with the restored content.
+    cancel: Cancel
+    confirm: Restore
+  diff:
+    title: Version Comparison
+    current: Current version
+    selected: Selected version

@@ -77,11 +77,16 @@ history:
     manual: Guardado Manual
     auto: Guardado Automático
     rollback: Restaurar
+  no_changes: No hay cambios disponibles
   actions:
-    view: Ver
     diff: Comparar
     restore: Restaurar
-  confirm_restore: ¿Estás seguro de que quieres restaurar esta versión?
-  diff_title: Comparar versiones
-  current: Actual
-  selected: Seleccionado
+  restore:
+    title: Historial de versiones
+    dialog: ¿Estás seguro de que quieres restaurar esta versión?
+    cancel: Cancelar
+    confirm: Confirmar
+  diff:
+    title: Comparar Versiones
+    current: Versión Actual
+    selected: Versión Seleccionada

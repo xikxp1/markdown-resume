@@ -58,13 +58,13 @@ export const computeContentHash = async (content: {
   }
 
   // Simple fallback hash for non-browser or if crypto fails
-  let hash = 0;
+  let simpleHash = 0;
   for (let i = 0; i < str.length; i++) {
     const char = str.charCodeAt(i);
-    hash = (hash << 5) - hash + char;
-    hash = hash & hash;
+    simpleHash = (simpleHash << 5) - simpleHash + char;
+    simpleHash = simpleHash & simpleHash;
   }
-  return hash.toString(16);
+  return simpleHash.toString(16);
 };
 
 /**
@@ -72,9 +72,9 @@ export const computeContentHash = async (content: {
  */
 export const addVersion = async (
   id: string,
-  payload: Omit<ResumeVersionItem, "hash" | "versionId" | "createdAt">
+  payload: Omit<ResumeVersionItem, "hash" | "versionId" | "createdAt">,
+  config: { public: { versionHistoryMax?: number; versionHistoryDedupe?: boolean } }
 ) => {
-  const config = useRuntimeConfig();
   const maxVersions = Number(config.public.versionHistoryMax ?? 200);
   const dedupe = config.public.versionHistoryDedupe !== false;
 
@@ -96,7 +96,7 @@ export const addVersion = async (
   // Create version
   const now = new Date().getTime().toString();
   const version: ResumeVersionItem = {
-    versionId: now,
+    versionId: (typeof crypto !== "undefined" && crypto.randomUUID) ? crypto.randomUUID() : now,
     createdAt: now,
     hash,
     ...payload
@@ -169,13 +169,14 @@ export const saveResume = async (
   await localForage.setItem(MARKDOWN_RESUME_KEY, storage);
 
   // Add to version history
+  const config = useRuntimeConfig();
   await addVersion(id, {
     type: saveType,
     name: resume.name,
     markdown: resume.markdown,
     css: resume.css,
     styles: resume.styles
-  });
+  }, config);
 
   const toast = useToast();
   toast.save();

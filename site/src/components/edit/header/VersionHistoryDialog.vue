@@ -9,7 +9,7 @@
         class="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-4xl max-h-[80vh] w-full mx-4 flex flex-col">
         <!-- Header -->
         <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-          <h2 class="text-xl font-semibold">Version History</h2>
+          <h2 class="text-xl font-semibold"> {{ $t('history.title') }}</h2>
           <button @click="$emit('close')" class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
             <span i-ic:baseline-close class="text-xl" />
           </button>
@@ -18,7 +18,7 @@
         <!-- Content -->
         <div class="flex-1 overflow-auto p-4">
           <div v-if="versions.length === 0" class="text-center text-gray-500 py-8">
-            No version history available
+            {{ $t('history.no_history') }}
           </div>
 
           <div v-else class="space-y-2">
@@ -33,12 +33,12 @@
                       'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300': version.type === 'auto',
                       'bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300': version.type === 'rollback'
                     }">
-                      {{ version.type === 'manual' ? 'Manual Save' : version.type === 'auto' ? 'Auto Save' : 'Rollback'
+                      {{ version.type === 'manual' ? $t('history.type.manual') : version.type === 'auto' ? $t('history.type.auto') : $t('history.type.rollback')
                       }}
                     </span>
                     <span v-if="isEqualToCurrent(version)" class="px-2 py-0.5 text-xs rounded-full" :class="'bg-orange-100 text-orange-700 dark:bg-orange-900 dark:text-orange-300'
                       ">
-                      Current
+                      {{ $t('history.no_changes') }}
                     </span>
                   </div>
                   <p class="text-sm text-gray-600 dark:text-gray-400">
@@ -49,11 +49,11 @@
                 <div class="flex gap-2 flex-shrink-0">
                   <button class="btn-secondary text-sm px-3 py-1.5" @click="viewDiff(version)"
                     :disabled="isEqualToCurrent(version)">
-                    View Diff
+                    {{ $t('history.actions.diff') }}
                   </button>
                   <button class="btn-primary text-sm px-3 py-1.5" @click="restoreVersion(version)"
                     :disabled="isEqualToCurrent(version)">
-                    Restore
+                    {{ $t('history.actions.restore') }}
                   </button>
                 </div>
               </div>
@@ -67,6 +67,21 @@
   <!-- Diff Viewer Dialog -->
   <DiffViewer v-if="showDiff && selectedVersion" :current-markdown="currentMarkdown" :current-css="currentCss"
     :version-markdown="selectedVersion.markdown" :version-css="selectedVersion.css" @close="showDiff = false" />
+
+  <!-- Restore Confirmation Modal -->
+  <Teleport to="body">
+    <div v-if="showRestoreConfirm" class="fixed inset-0 z-60 flex items-center justify-center">
+      <div class="absolute inset-0 bg-black/50" @click="showRestoreConfirm = false" />
+      <div class="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full mx-4 p-6">
+        <h3 class="text-lg font-semibold mb-4">{{ $t('history.restore.title') }}</h3>
+        <p class="mb-6">{{ $t('history.restore.dialog') }}</p>
+        <div class="flex justify-end gap-2">
+          <button class="btn-secondary px-4 py-2" @click="showRestoreConfirm = false">{{ $t('history.restore.cancel') }}</button>
+          <button class="btn-primary px-4 py-2" @click="confirmRestore">{{ $t('history.restore.confirm') }}</button>
+        </div>
+      </div>
+    </div>
+  </Teleport>
 </template>
 
 <script lang="ts" setup>
@@ -88,6 +103,8 @@ const { data } = useDataStore();
 const versions = ref<ResumeVersionItem[]>([]);
 const showDiff = ref(false);
 const selectedVersion = ref<ResumeVersionItem | null>(null);
+const showRestoreConfirm = ref(false);
+const versionToRestore = ref<ResumeVersionItem | null>(null);
 
 // Capture current content as snapshot (not reactive)
 const currentMarkdown = ref('');
@@ -132,10 +149,17 @@ const viewDiff = (version: ResumeVersionItem) => {
   showDiff.value = true;
 };
 
-const restoreVersion = async (version: ResumeVersionItem) => {
-  if (confirm('Are you sure you want to restore this version? This will create a new version with the restored content.')) {
-    await rollbackResume(props.resumeId, version.versionId);
+const restoreVersion = (version: ResumeVersionItem) => {
+  versionToRestore.value = version;
+  showRestoreConfirm.value = true;
+};
+
+const confirmRestore = async () => {
+  if (versionToRestore.value) {
+    await rollbackResume(props.resumeId, versionToRestore.value.versionId);
     await loadVersions(); // Reload to show the new rollback version
+    showRestoreConfirm.value = false;
+    versionToRestore.value = null;
   }
 };
 

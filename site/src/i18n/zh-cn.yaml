@@ -77,11 +77,16 @@ history:
     manual: 手动保存
     auto: 自动保存
     rollback: 回滚
+  no_changes: 暂无更改
   actions:
-    view: 查看
     diff: 比较
     restore: 恢复
-  confirm_restore: 您确定要恢复到此版本吗？
-  diff_title: 比较版本
-  current: 当前版本
-  selected: 选定版本
+  restore:
+    title: 恢复
+    dialog: 您确定要恢复到此版本吗？
+    cancel: 取消
+    confirm: 确认
+  diff:
+    title: 比较
+    current: 当前
+    selected: 选定
