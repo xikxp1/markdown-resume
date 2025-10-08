@@ -67,3 +67,26 @@ notification:
   import:
     yes: 已成功导入数据！
     no : 数据格式不正确
+  restore: 恢复
+  error: 发生错误
+
+history:
+  title: 历史记录
+  no_history: 暂无历史记录
+  type:
+    manual: 手动保存
+    auto: 自动保存
+    rollback: 回滚
+  no_changes: 暂无更改
+  actions:
+    diff: 比较
+    restore: 恢复
+  restore:
+    title: 恢复
+    dialog: 您确定要恢复到此版本吗？
+    cancel: 取消
+    confirm: 确认
+  diff:
+    title: 比较
+    current: 当前
+    selected: 选定

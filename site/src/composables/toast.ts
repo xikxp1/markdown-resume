@@ -70,6 +70,20 @@ export const useToast = () => {
     }
   };
 
+  const restore = () => {
+    $toast.value.create({
+      description: nuxtApp.$i18n.t("notification.restore"),
+      type: "success"
+    });
+  };
+
+  const error = () => {
+    $toast.value.create({
+      description: nuxtApp.$i18n.t("notification.error"),
+      type: "error"
+    });
+  };
+
   return {
     save,
     switch: switchResume,
@@ -77,6 +91,8 @@ export const useToast = () => {
     new: newResume,
     duplicate,
     correct,
-    import: importResume
+    import: importResume,
+    restore,
+    error
   };
 };

@@ -67,3 +67,26 @@ notification:
   import:
     yes: Data has been successfully imported!
     no : Data format is invalid.
+  restore: Version restored successfully!
+  error: An error occurred.
+
+history:
+  title: Version History
+  no_history: No version history available
+  type:
+    manual: Manual save
+    auto: Autosave
+    rollback: Rollback
+  no_changes: No changes
+  actions:
+    diff: View diff
+    restore: Restore
+  restore:
+    title: Restore Version
+    dialog: Are you sure you want to restore this version? This will create a new version with the restored content.
+    cancel: Cancel
+    confirm: Restore
+  diff:
+    title: Version Comparison
+    current: Current version
+    selected: Selected version
