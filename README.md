@@ -39,6 +39,7 @@ Highly recommend using Chromium-based browsers, e.g., [Chrome](https://www.googl
   - Data are saved locally within your browser, see [here](https://localforage.github.io/localForage/) for details
   - Open-source static website hosted on [Github Pages](https://pages.github.com/), which doesn't (have the ability to) collect your data
   - No user tracking, no ads
+- Auto-save - Your changes are automatically saved
 - Dark mode
 
 ## Development
@@ -57,17 +58,39 @@ Build some [packages](packages):
 pnpm build:pkg
 ```
 
+Start developing / building the site:
+
+```bash
+pnpm dev
+pnpm build
+```
+
+## Configuration
+
+### Google Fonts
+
 To enable picking fonts from [Google Fonts](https://fonts.google.com/), you will need to generate a [Google Fonts Developer API Key](https://developers.google.com/fonts/docs/developer_api#APIKey). Then, create a `.env` file in [`site`](site/) folder and put:
 
 ```
 NUXT_PUBLIC_GOOGLE_FONTS_KEY="YOUR_API_KEY"
 ```
 
-Start developing / building the site:
+### Auto-save Debounce
 
-```bash
-pnpm dev
-pnpm build
+By default, auto-save triggers 3000ms (3 seconds) after the last edit. You can customize this by setting the `NUXT_PUBLIC_AUTOSAVE_DEBOUNCE_MS` environment variable:
+
+```
+NUXT_PUBLIC_AUTOSAVE_DEBOUNCE_MS=5000
+```
+
+Or modify the default value directly in [`site/nuxt.config.ts`](site/nuxt.config.ts):
+
+```typescript
+runtimeConfig: {
+  public: {
+    autosaveDebounceMs: 3000  // Change this value
+  }
+}
 ```
 
 ## Credits
