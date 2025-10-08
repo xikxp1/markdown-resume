@@ -77,7 +77,10 @@ export const setupMonacoEditor = async (container: HTMLDivElement) => {
     fontSize: 13,
     fontFamily: `Menlo, Monaco, "Courier New", monospace`,
     lineHeight: 1.5,
-    automaticLayout: true
+    automaticLayout: true,
+    minimap: {
+      enabled: false
+    }
   }) as Monaco.editor.IStandaloneCodeEditor;
 
   disposables.push(editor);
