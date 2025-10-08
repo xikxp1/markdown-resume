@@ -114,13 +114,6 @@ runtimeConfig: {
 }
 ```
 
-**Features:**
-- Every save (manual or auto) creates a new version
-- Click the History button (clock icon) in the editor to view all versions
-- View side-by-side diffs comparing any version with the current content
-- Restore any previous version - this creates a new version, so rollback is reversible
-- Versions are stored locally alongside your resume data
-
 ## Credits
 
 - The original work: [Renovamen/oh-my-cv](https://github.com/Renovamen/oh-my-cv)
