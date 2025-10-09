@@ -23,7 +23,6 @@ export const i18n: NuxtI18nOptions = {
       file: "zh-cn.yaml"
     }
   ],
-  langDir: "i18n",
   compilation: {
     strictMessage: false
   }

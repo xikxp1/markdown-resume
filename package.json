@@ -17,15 +17,15 @@
   },
   "prettier": "@renovamen/prettier-config",
   "devDependencies": {
-    "@renovamen/eslint-config": "^0.1.6",
-    "@renovamen/prettier-config": "^0.1.6",
-    "bumpp": "^9.4.0",
-    "eslint": "^9.0.0",
-    "pnpm": "^8.15.6",
-    "prettier": "^3.2.5",
-    "taze": "^0.13.3",
-    "tsup": "^8.0.2",
-    "typescript": "^5.4.5"
+    "@renovamen/eslint-config": "0.1.9",
+    "@renovamen/prettier-config": "0.1.9",
+    "bumpp": "10.3.1",
+    "eslint": "9.37.0",
+    "pnpm": "10.18.1",
+    "prettier": "3.6.2",
+    "taze": "19.7.0",
+    "tsup": "8.5.0",
+    "typescript": "5.9.3"
   },
-  "version": "0.1.1"
+  "version": "0.2.0"
 }

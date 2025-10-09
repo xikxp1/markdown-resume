@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@nuxtjs/color-mode",
     "@vite-pwa/nuxt",
-    "nuxt-simple-sitemap"
+    "@nuxtjs/sitemap"
   ],
 
   css: [
@@ -73,5 +73,7 @@ export default defineNuxtConfig({
   },
 
   pwa,
+
+  compatibilityDate: '2025-10-09',
 
 });

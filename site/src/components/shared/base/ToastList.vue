@@ -1,11 +1,13 @@
 <template>
-  <div
-    v-for="(toasts, placement, index) in $toast.toastsByPlacement"
-    :key="index"
-    class="toast-container"
-  >
-    <div :key="placement" v-bind="$toast.getGroupProps({ placement })">
-      <Toast v-for="toast in toasts" :key="toast.id" :actor="toast" />
+  <div>
+    <div v-bind="api.getGroupProps()">
+      <Toast
+        v-for="(toast, index) in api.getToasts()"
+        :key="toast.id"
+        :toast="toast"
+        :index="index"
+        :parent="service"
+      />
     </div>
   </div>
 </template>
@@ -16,17 +18,21 @@ import { normalizeProps, useMachine } from "@zag-js/vue";
 
 const nuxtApp = useNuxtApp();
 
-const [state, send] = useMachine(
-  toast.group.machine({
-    id: "toast",
-    placement: "bottom-end",
-    duration: 2500,
-    removeDelay: 750
-  })
-);
-const toastApi = computed(() => toast.group.connect(state.value, send, normalizeProps));
+// Create the toast store
+const toaster = toast.createStore({
+  placement: "bottom-end",
+  overlap: true,
+  duration: 2500,
+  removeDelay: 750
+});
 
-nuxtApp.provide("toast", toastApi);
+const service = useMachine(toast.group.machine, {
+  id: "toast",
+  store: toaster
+});
 
-const $toast = computed(() => (nuxtApp.$toast as ComputedRef<toast.GroupApi>).value);
+const api = computed(() => toast.group.connect(service, normalizeProps));
+
+// Provide the toaster store to be used by the composable
+nuxtApp.provide("toast", toaster);
 </script>

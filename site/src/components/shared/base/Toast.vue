@@ -1,6 +1,6 @@
 <template>
   <div
-    v-bind="api.rootProps"
+    v-bind="api.getRootProps()"
     class="hstack space-x-5 min-w-80 text-white rounded-md shadow-c px-4 py-3"
     :class="bgColor"
   >
@@ -10,7 +10,7 @@
         <span v-else-if="api.type === 'info'" i-material-symbols:info-rounded text-lg />
         <span v-else-if="api.type === 'error'" i-bx:bxs-error />
       </div>
-      <p v-bind="api.descriptionProps">{{ api.description }}</p>
+      <p v-bind="api.getDescriptionProps()">{{ api.description }}</p>
     </div>
 
     <button size-6 flex-center @click="api.dismiss()">
@@ -21,12 +21,22 @@
 
 <script lang="ts" setup>
 import * as toast from "@zag-js/toast";
-import { normalizeProps, useActor } from "@zag-js/vue";
+import { normalizeProps, useMachine } from "@zag-js/vue";
 
-const props = defineProps<{ actor: toast.Service }>();
+const props = defineProps<{
+  toast: any,
+  index: number,
+  parent: any
+}>();
 
-const [state, send] = useActor(props.actor);
-const api = computed(() => toast.connect(state.value, send, normalizeProps));
+const machineProps = computed(() => ({
+  ...props.toast,
+  parent: props.parent,
+  index: props.index
+}));
+
+const service = useMachine(toast.machine, machineProps);
+const api = computed(() => toast.connect(service, normalizeProps));
 
 const bgColor = computed(() => {
   switch (api.value.type) {
@@ -43,6 +53,16 @@ const bgColor = computed(() => {
 </script>
 
 <style scoped>
+/* Required CSS variables for zag.js toast */
+[data-part="root"] {
+  translate: var(--x) var(--y);
+  scale: var(--scale);
+  z-index: var(--z-index);
+  height: var(--height);
+  opacity: var(--opacity);
+  will-change: translate, opacity, scale;
+}
+
 /* Borrowed from https://github.com/Maronato/vue-toastification/blob/next/src/scss/animations/_bounce.scss */
 
 [data-part="root"][data-state="open"] {
