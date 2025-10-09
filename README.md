@@ -6,16 +6,6 @@
 
 <img align="center" src="https://raw.githubusercontent.com/junian/markdown-resume/assets/img/markdown-resume-screenshot-00.jpg"/>
 
-## About
-
-A fork of "Oh My CV!". You can visit the original work [here](https://ohmycv.app/).
-
-Changes I made from the original work:
-- Default template is now as close as possible with [CareerCup's](https://www.careercup.com/resume) resume template.
-- Default color is all Black.
-- Added Web-safe fonts for easier ATS parsing.
-- And many more ...
-
 ## Notice
 
 Highly recommend using Chromium-based browsers, e.g., [Chrome](https://www.google.com/chrome/) and [Microsoft Edge](https://www.microsoft.com/en-us/edge).
@@ -41,6 +31,7 @@ Highly recommend using Chromium-based browsers, e.g., [Chrome](https://www.googl
   - No user tracking, no ads
 - Autosave
 - Version history and rollback
+- Github sync
 - Dark mode
 
 ## Development
@@ -116,13 +107,10 @@ runtimeConfig: {
 
 ## Credits
 
+- Forked from [Renovamen/markdown-resume](https://github.com/Renovamen/markdown-resume)
 - The original work: [Renovamen/oh-my-cv](https://github.com/Renovamen/oh-my-cv)
 - [billryan/resume](https://github.com/billryan/resume)
 
 ## License
 
 This project is licensed under [MIT](LICENSE) license.
-
----
-
-Made with ☕ by [Junian.dev](https://www.junian.dev).

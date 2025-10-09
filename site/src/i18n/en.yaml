@@ -41,8 +41,8 @@ toolbar:
     export_md: Export Markdown
   correct_case:
     text: Correct Case
-    desc: "Example: \"Github\" → \"GitHub\" <br> Note: the words only including uppercase or lowercase (\"GITHUB\" or \"github\") will be left untouched"
-    btn : Correct it!
+    desc: 'Example: "Github" → "GitHub" <br> Note: the words only including uppercase or lowercase ("GITHUB" or "github") will be left untouched'
+    btn: Correct it!
   paper: Paper Size
   font_family: Font Family
   font_size: Font Size
@@ -54,6 +54,19 @@ toolbar:
   margin: Margin
   vertical: Top & Bottom
   horizontal: Left & Right
+  github:
+    text: GitHub
+    settings: Settings
+    sync: Sync to GitHub
+    token: GitHub Token
+    token_placeholder: Enter your GitHub personal access token
+    token_help: Generate a token with 'repo' scope at GitHub Settings > Developer settings > Personal access tokens
+    repository: Repository
+    repo_placeholder: owner/repository-name
+    repo_help: The GitHub repository to sync your resumes to (e.g., username/resumes). Repo shouldn't be empty
+    save: Save
+    reset: Reset
+    settings_title: GitHub Settings
 
 notification:
   save: Your changes have been saved
@@ -63,12 +76,13 @@ notification:
   duplicate: Created resume "{old}"'s duplication "{new}"
   correct:
     yes: Corrected {num} words
-    no : All case are correct!
+    no: All case are correct!
   import:
     yes: Data has been successfully imported!
-    no : Data format is invalid.
+    no: Data format is invalid.
   restore: Version restored successfully!
   error: An error occurred.
+  saved_to_github: Successfully synced to GitHub
 
 history:
   title: Version History
@@ -90,3 +104,13 @@ history:
     title: Version Comparison
     current: Current version
     selected: Selected version
+
+github:
+  error:
+    token_not_provided: GitHub token not provided
+    incorrect_repo: GitHub repository not configured properly
+    sync_failed: GitHub sync failed
+    token_invalid: GitHub token invalid or missing
+    token_insufficient_permissions: Insufficient permissions (repo scope required)
+    repo_not_found: Repo or branch not found
+    file_conflict: File conflict; please try again

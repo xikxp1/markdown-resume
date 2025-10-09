@@ -8,10 +8,7 @@
       <template #tail>
         <SaveResume />
         <HistoryButton @open-history="showHistory = true" />
-        <ToggleToolbar
-          :is-toolbar-open="isToolbarOpen"
-          @toggle-toolbar="isToolbarOpen = !isToolbarOpen"
-        />
+        <ToggleToolbar :is-toolbar-open="isToolbarOpen" @toggle-toolbar="isToolbarOpen = !isToolbarOpen" />
       </template>
     </Header>
 
@@ -34,12 +31,8 @@
     </div>
 
     <!-- Version History Dialog -->
-    <VersionHistoryDialog
-      v-if="data.curResumeId"
-      :resume-id="data.curResumeId"
-      :open="showHistory"
-      @close="showHistory = false"
-    />
+    <VersionHistoryDialog v-if="data.curResumeId" :resume-id="data.curResumeId" :open="showHistory"
+      @close="showHistory = false" />
   </div>
 </template>
 
@@ -78,7 +71,7 @@ const createResumePayload = (): ResumeStorageItem => ({
 });
 
 // Debounced autosave function
-const performAutosave = () => {
+const performAutosave = async () => {
   const id = data.curResumeId;
   if (!id) return;
   saveResume(id, createResumePayload(), "auto");

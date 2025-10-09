@@ -1,6 +1,7 @@
 import * as localForage from "localforage";
 import { downloadFile, uploadFile, copy, isClient } from "@renovamen/utils";
 import { DEFAULT_STYLES, DEFAULT_NAME, DEFAULT_MD_CONTENT, DEFAULT_CSS_CONTENT } from ".";
+import { commitResumeToGithub } from "./github";
 import type { ResumeStorage, ResumeStorageItem, ResumeStyles, ResumeHistoryStorage, ResumeVersionItem, SaveType } from "~/types";
 
 const MARKDOWN_RESUME_KEY = "MARKDOWN_RESUME_data";
@@ -180,6 +181,22 @@ export const saveResume = async (
 
   const toast = useToast();
   toast.save();
+
+  // GitHub sync
+  try {
+    const result = await commitResumeToGithub(id, resume, saveType);
+    if (result.supress) {
+      return;
+    } else if (result.success) {
+      toast.savedtoGithub();
+    } else if (!result.success && result.error) {
+      toast.customError(result.error);
+    } else {
+      toast.error();
+    }
+  } catch {
+    toast.error();
+  }
 };
 
 /**

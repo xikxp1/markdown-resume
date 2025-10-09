@@ -15,12 +15,18 @@ import Margins from './toolbar/Margins.vue';
 import ParagraphSpace from './toolbar/ParagraphSpace.vue';
 import LineHeight from './toolbar/LineHeight.vue';
 import CorrectCase from './toolbar/CorrectCase.vue';
+import Github from './toolbar/Github.vue';
 
 const sections = [
   {
     name: "file",
     icon: "i-carbon:import-export",
     component: <div id="toolbar-file"><File /></div>
+  },
+  {
+    name: "github",
+    icon: "i-carbon:logo-github",
+    component: <div id="toolbar-github"><Github /></div>
   },
   {
     name: "paper",

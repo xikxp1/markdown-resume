@@ -13,6 +13,7 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/color-mode": "^3.3.3",
     "@nuxtjs/i18n": "^8.3.0",
+    "@octokit/rest": "^22.0.0",
     "@pinia/nuxt": "^0.5.1",
     "@renovamen/dynamic-css": "workspace:*",
     "@renovamen/front-matter": "workspace:*",

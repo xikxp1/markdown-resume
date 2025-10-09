@@ -84,6 +84,20 @@ export const useToast = () => {
     });
   };
 
+  const customError = (error: string) => {
+    $toast.value.create({
+      description: nuxtApp.$i18n.t(error),
+      type: "error"
+    });
+  };
+
+  const savedtoGithub = () => {
+    $toast.value.create({
+      description: nuxtApp.$i18n.t("notification.saved_to_github"),
+      type: "success"
+    });
+  }
+
   return {
     save,
     switch: switchResume,
@@ -93,6 +107,8 @@ export const useToast = () => {
     correct,
     import: importResume,
     restore,
-    error
+    error,
+    customError,
+    savedtoGithub
   };
 };

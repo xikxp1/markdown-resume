@@ -9,12 +9,12 @@ head:
 landing:
   hero: Escribe tu <span text-brand>curriculum vitae</span> en Markdown!
   desc: es una herramienta gratuita y de código abierto creada para crear y administrar sus currículums de la manera más fácil posible, sin perder la privacidad de sus datos.
-  start: Crear My Resumen
+  start: Crear Mi Currículum
   feats:
     - title: Simple y poderoso
-      items: Administra multiples curriculums con <br>Vista previa en tiempo real<br>Exportar a PDF format<br>Completamente configurable<br>Elige fuentes y agrega íconos<br>Y <a href="https://github.com/junian/markdown-resume#features" target="_blank">más funciones</a>
+      items: Administra multiples curriculums con <br>Vista previa en tiempo real<br>Exportar a formato PDF<br>Completamente configurable<br>Elige fuentes y agrega íconos<br>Y <a href="https://github.com/junian/markdown-resume#features" target="_blank">más funciones</a>
     - title: Primero tu privacidad
-      items: Open source, libre y gratuito<br>Información guardada en tu equipo<br>No necesita que te registres<br>No realizamos ningún trackeo ni mostramos publicidad<br>No ads
+      items: Código abierto, libre y gratuito<br>Información guardada en tu equipo<br>No necesita que te registres<br>No realizamos ningún seguimiento ni mostramos publicidad<br>Sin anuncios
 
 resumes:
   my_resumes: Mis CVs
@@ -41,8 +41,8 @@ toolbar:
     export_md: Exportar Markdown
   correct_case:
     text: Corregir Mayusculas
-    desc: "Ejemplo: \"Github\" → \"GitHub\" <br> Nota: No se modificarán las palabras que sólo contengan mayúsculas o minúsculas (\"GITHUB\" or \"github\")"
-    btn : Corrígelo!
+    desc: "Ejemplo: \"Github\" → \"GitHub\" <br> Nota: No se modificarán las palabras que sólo contengan mayúsculas o minúsculas (\"GITHUB\" o \"github\")"
+    btn: Corrígelo!
   paper: Tamaño de hoja
   font_family: Fuente
   font_size: Tamaño de Fuente
@@ -54,21 +54,35 @@ toolbar:
   margin: Margenes
   vertical: Arriba & Abajo
   horizontal: Izquierdo & Derecho
+  github:
+    text: GitHub
+    settings: Configuración
+    sync: Sincronizar con GitHub
+    token: Token de GitHub
+    token_placeholder: Ingresa tu token de acceso personal de GitHub
+    token_help: Genera un token con permiso 'repo' en Configuración de GitHub > Configuración de desarrollador > Tokens de acceso personal
+    repository: Repositorio
+    repo_placeholder: propietario/nombre-del-repositorio
+    repo_help: "El repositorio de GitHub para sincronizar tus currículums (ej: usuario/curriculums). El repositorio no debe estar vacío"
+    save: Guardar
+    reset: Restablecer
+    settings_title: Configuración de GitHub
 
 notification:
   save: Cambios Guardados
   switch: Cambiando a curriculum "{msg}"
-  delete: Curriculum "{msg}" has been deleted
+  delete: Curriculum "{msg}" ha sido eliminado
   new: Creado nuevo resumen
-  duplicate: Created resume "{old}"'s duplication "{new}"
+  duplicate: Creado duplicado del currículum "{old}" como "{new}"
   correct:
     yes: Corregidos {num} palabras
-    no : Buen trabajo, no hubo nada que corregir!
+    no: Buen trabajo, no hubo nada que corregir!
   import:
     yes: Datos importados correctamente!
-    no : Formato de datos inválido.
+    no: Formato de datos inválido.
   restore: Restaurar desde copia de seguridad
   error: Error al guardar los cambios
+  saved_to_github: Sincronizado exitosamente con GitHub
 
 history:
   title: Historial de versiones
@@ -90,3 +104,13 @@ history:
     title: Comparar Versiones
     current: Versión Actual
     selected: Versión Seleccionada
+
+github:
+  error:
+    token_not_provided: Token de GitHub no proporcionado
+    incorrect_repo: Repositorio de GitHub no configurado correctamente
+    sync_failed: Falló la sincronización con GitHub
+    token_invalid: Token de GitHub inválido o faltante
+    token_insufficient_permissions: Permisos insuficientes (se requiere permiso repo)
+    repo_not_found: Repositorio o rama no encontrado
+    file_conflict: Conflicto de archivo; por favor inténtalo de nuevo

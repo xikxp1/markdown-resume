@@ -42,7 +42,7 @@ toolbar:
   correct_case:
     text: 专有名词大小写修正
     desc: "例如：\"Github\" → \"GitHub\" <br> 注意：不会修正全为大写或小写字母的单词（如 \"GITHUB\" 或 \"github\"）"
-    btn : 修正
+    btn: 修正
   paper: 纸张尺寸
   font_family: 字体
   font_size: 字号
@@ -54,6 +54,19 @@ toolbar:
   margin: 页边距
   vertical: 上下
   horizontal: 左右
+  github:
+    text: GitHub
+    settings: 设置
+    sync: 同步到 GitHub
+    token: GitHub 令牌
+    token_placeholder: 输入您的 GitHub 个人访问令牌
+    token_help: 在 GitHub 设置 > 开发者设置 > 个人访问令牌中生成具有 'repo' 权限的令牌
+    repository: 仓库
+    repo_placeholder: 所有者/仓库名称
+    repo_help: 用于同步简历的 GitHub 仓库（例如：username/resumes）。仓库不应为空
+    save: 保存
+    reset: 重置
+    settings_title: GitHub 设置
 
 notification:
   save: 保存成功
@@ -63,12 +76,13 @@ notification:
   duplicate: 已创建简历 "{old}" 的副本 "{new}"
   correct:
     yes: 成功修正 {num} 个单词
-    no : 您的所有拼写都是正确的！
+    no: 您的所有拼写都是正确的！
   import:
     yes: 已成功导入数据！
-    no : 数据格式不正确
+    no: 数据格式不正确
   restore: 恢复
   error: 发生错误
+  saved_to_github: 成功同步到 GitHub
 
 history:
   title: 历史记录
@@ -90,3 +104,13 @@ history:
     title: 比较
     current: 当前
     selected: 选定
+
+github:
+  error:
+    token_not_provided: 未提供 GitHub 令牌
+    incorrect_repo: GitHub 仓库配置不正确
+    sync_failed: GitHub 同步失败
+    token_invalid: GitHub 令牌无效或缺失
+    token_insufficient_permissions: 权限不足（需要 repo 权限）
+    repo_not_found: 仓库或分支未找到
+    file_conflict: 文件冲突；请重试
