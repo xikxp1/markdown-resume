@@ -21,6 +21,12 @@ export const i18n: NuxtI18nOptions = {
       name: "简体中文",
       icon: "i-icon-park-outline:chinese",
       file: "zh-cn.yaml"
+    },
+    {
+      code: "ru",
+      name: "Русский",
+      icon: "i-material-symbols:language-russian",
+      file: "ru.yaml"
     }
   ],
   langDir: "i18n",
