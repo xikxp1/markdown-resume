@@ -35,7 +35,7 @@
                         </p>
                     </div>
 
-                    <div class="flex space-x-2 pt-2">
+                    <div class="flex justify-end space-x-2 pt-2">
                         <button
                             class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
                             @click="resetSettings">
