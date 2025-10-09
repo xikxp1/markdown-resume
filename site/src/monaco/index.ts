@@ -75,7 +75,7 @@ export const setupMonacoEditor = async (container: HTMLDivElement) => {
   const editor = monaco.editor.create(container, {
     wordWrap: "on",
     fontSize: 13,
-    fontFamily: `Menlo, Monaco, "Courier New", monospace`,
+    fontFamily: "monospace",
     lineHeight: 1.5,
     automaticLayout: true,
     minimap: {

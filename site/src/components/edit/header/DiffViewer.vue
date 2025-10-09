@@ -89,7 +89,7 @@ const setupDiffEditor = async () => {
   diffEditor = monaco.editor.createDiffEditor(diffEditorRef.value, {
     wordWrap: "on",
     fontSize: 13,
-    fontFamily: `Menlo, Monaco, "Courier New", monospace`,
+    fontFamily: "monospace",
     lineHeight: 1.5,
     automaticLayout: true,
     renderSideBySide: true,
