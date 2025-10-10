@@ -62,7 +62,7 @@ export default defineNuxtConfig({
         { name: "application-name", content: "Markdown Resume" },
         { name: "apple-mobile-web-app-title", content: "Markdown Resume" },
         { name: "msapplication-TileColor", content: "#fff" },
-        { property: "og:url", content: "https://www.md-resume.xikxp1.dev/" },
+        { property: "og:url", content: "https://md-resume.xikxp1.dev/" },
         { property: "og:type", content: "website" }
       ]
     }
