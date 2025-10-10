@@ -45,12 +45,8 @@ export default defineNuxtConfig({
   },
 
   app: {
-    // If host it on https://example.com
-    //    baseURL: '/'
-    // Else if host it on https://example.com/resume
-    //    baseURL: '/resume/'
-    baseURL: '/', // baseURL: '/<repository>/'
-    buildAssetsDir: 'assets', // don't use "_" at the begining of the folder name to avoids
+    baseURL: '/',
+    buildAssetsDir: '/_nuxt',
     head: {
       viewport: "width=device-width,initial-scale=1",
       link: [
