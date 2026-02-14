@@ -11,6 +11,12 @@ export const i18n: NuxtI18nOptions = {
       file: "en.yaml"
     },
     {
+      code: "id",
+      name: "Bahasa Indonesia",
+      icon: "i-circle-flags:id",
+      file: "id.yaml"
+    },
+    {
       code: "sp",
       name: "Spanish",
       icon: "i-material-symbols:language-spanish",
