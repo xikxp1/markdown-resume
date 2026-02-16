@@ -59,15 +59,32 @@ const exportMd = () => {
 const exportHtml = () => {
   const html = renderMarkdown(data.mdContent);
   
+  // Get paper dimensions in pixels
+  const paperWidthMm = PAPER[styles.paper].w;
+  const paperHeightMm = PAPER[styles.paper].h;
+  const paperWidthPx = getPaperPx(styles.paper, 'w');
+  
   // Generate dynamic CSS based on current styles
   const dynamicCss = `
     /* Dynamic Styles */
     body {
       font-family: ${styles.fontEN.fontFamily || styles.fontEN.name}, ${styles.fontCJK.fontFamily || styles.fontCJK.name};
       font-size: ${styles.fontSize}px;
-      background-color: white;
+      background-color: #f5f5f5;
       color: black;
-      margin: ${styles.marginV}px ${styles.marginH}px;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    
+    #vue-smart-pages-preview {
+      background-color: white;
+      width: ${paperWidthPx}px;
+      max-width: 100%;
+      padding: ${styles.marginV}px ${styles.marginH}px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
     }
     
     :not(.resume-header-item) > a {
@@ -97,18 +114,41 @@ const exportHtml = () => {
     h2 {
       margin-top: ${styles.paragraphSpace}px;
     }
+    
+    @media print {
+      body {
+        background-color: white;
+        padding: 0;
+        margin: 0;
+      }
+      
+      #vue-smart-pages-preview {
+        width: 100%;
+        max-width: none;
+        box-shadow: none;
+        margin: 0;
+        padding: ${styles.marginV}px ${styles.marginH}px;
+      }
+      
+      @page {
+        size: ${styles.paper};
+        margin: 0;
+      }
+    }
   `;
   
   // Combine backbone CSS with dynamic CSS
   const fullCss = data.cssContent + dynamicCss;
   
   // Create complete HTML document
+  const scriptTag = '<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"><\/script>';
   const htmlDocument = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${data.curResumeName}</title>
+  ${scriptTag}
   <style>
 ${fullCss}
   </style>

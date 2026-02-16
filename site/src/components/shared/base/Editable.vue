@@ -1,9 +1,9 @@
 <template>
   <div
-    class="border-1.5 rounded"
+    class="border-1.5 rounded hstack space-x-1"
     :class="api.isEditing ? 'border-dark-c' : 'border-transparent'"
   >
-    <div v-bind="api.rootProps">
+    <div v-bind="api.rootProps" class="flex-1">
       <div v-bind="api.areaProps">
         <input
           v-bind="api.inputProps"
@@ -12,6 +12,13 @@
         <div v-bind="api.previewProps" text-center truncate />
       </div>
     </div>
+    <button
+      v-bind="api.editTriggerProps"
+      class="cursor-pointer p-1 rounded transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+      :title="$t ? $t('resumes.rename') : 'Rename'"
+    >
+      <span i-mdi:pencil text-sm />
+    </button>
   </div>
 </template>
 
@@ -29,10 +36,17 @@ const [state, send] = useMachine(
   editable.machine({
     id: props.id,
     selectOnFocus: false,
-    submitMode: "enter",
+    submitMode: "both",
     onValueCommit: (details) => {
-      console.log("Value submitted", details.value);
-      props.onValueCommit(details.value);
+      const newValue = details.value.trim();
+      // Only commit if the value is not empty and different from default
+      if (newValue && newValue !== props.default) {
+        console.log("Value submitted", newValue);
+        props.onValueCommit(newValue);
+      } else {
+        // Revert to default if empty or unchanged
+        api.value.setValue(props.default);
+      }
     }
   })
 );
